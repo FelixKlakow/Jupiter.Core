@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jupiter.Core", "Jupiter.Core\Jupiter.Core.csproj", "{80412983-E170-474A-828A-4B6392428DD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jupiter.Core.Tests.DependencySystem", "Jupiter.Core.Tests.DependencySystem\Jupiter.Core.Tests.DependencySystem.csproj", "{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{80412983-E170-474A-828A-4B6392428DD8}.Release|x64.Build.0 = Release|x64
 		{80412983-E170-474A-828A-4B6392428DD8}.Release|x86.ActiveCfg = Release|x86
 		{80412983-E170-474A-828A-4B6392428DD8}.Release|x86.Build.0 = Release|x86
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Debug|x64.Build.0 = Debug|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Debug|x86.Build.0 = Debug|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Release|x64.ActiveCfg = Release|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Release|x64.Build.0 = Release|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Release|x86.ActiveCfg = Release|Any CPU
+		{63099BDA-67DD-4A44-8B5A-D3BA4E413E45}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
