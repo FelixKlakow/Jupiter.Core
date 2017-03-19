@@ -5,3 +5,7 @@ Upcomming features:
 - Animations
 - Property-Bindings
 - Serialization-Deserialization
+
+
+Author:
+Felix Klakow
