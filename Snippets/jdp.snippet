@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>jdp</Title>
+      <Author>Felix</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>jdp</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Type</ID>
+          <ToolTip>Property type</ToolTip>
+          <Default>Int32</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Name</ID>
+          <ToolTip>Property name</ToolTip>
+          <Default>MyProperty</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ParentType</ID>
+          <ToolTip>ParentType</ToolTip>
+          <Default>Unknown</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[public static readonly DependencyProperty<$Type$> $Name$Property = DependencyProperty.Create<$ParentType$, $Type$>(p => p.$Name$);
+public $Type$ $Name$
+{
+    get { return GetValue($Name$Property); }
+    set { SetValue($Name$Property, value); }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

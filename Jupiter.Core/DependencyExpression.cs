@@ -5,7 +5,7 @@ using System.Text;
 namespace Jupiter
 {
     /// <summary>
-    /// 
+    /// Represents the base class for expression which can be assigned to a <see cref="DependencyProperty"/> to overwrite the original value.
     /// </summary>
     public abstract class DependencyExpression
     {

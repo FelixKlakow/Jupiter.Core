@@ -12,7 +12,13 @@ namespace Jupiter.Reflection
     /// <typeparam name="T">The type to get the <see cref="Type"/> for.</typeparam>
     static class TypeOf<T>
     {
+        /// <summary>
+        /// The <see cref="Type"/> which represents the generic parameter <see cref="T"/>.
+        /// </summary>
         public static readonly Type Type = typeof(T);
+        /// <summary>
+        /// The <see cref="TypeInfo"/> which represents the generic parameter <see cref="T"/>.
+        /// </summary>
         public static readonly TypeInfo TypeInfo = Type.GetTypeInfo();
     }
 }

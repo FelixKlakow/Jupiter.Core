@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>jdpr</Title>
+      <Author>Felix</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>jdpr</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Type</ID>
+          <ToolTip>Property type</ToolTip>
+          <Default>Int32</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Name</ID>
+          <ToolTip>Property name</ToolTip>
+          <Default>MyProperty</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ParentType</ID>
+          <ToolTip>ParentType</ToolTip>
+          <Default>Unknown</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$">
+        <![CDATA[static readonly DependencyPropertyKey<$Type$> $Name$PropertyKey = DependencyProperty.CreateReadonly<$ParentType$, $Type$>(p => p.$Name$);
+public static readonly DependencyProperty<$Type$> $Name$Property = $Name$PropertyKey.Property;
+public $Type$ $Name$
+{
+    get { return GetValue($Name$Property); }
+    private set { SetValue($Name$PropertyKey, value); }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
