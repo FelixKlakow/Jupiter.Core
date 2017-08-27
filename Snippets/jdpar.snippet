@@ -30,15 +30,22 @@
           </Function>
         </Literal>
         <Literal Editable="true">
+          <ID>DeclaringType</ID>
+          <ToolTip>DeclaringType</ToolTip>
+          <Default>Unknown</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
           <ID>ParentType</ID>
           <ToolTip>ParentType</ToolTip>
-          <Default>Unknown</Default>
+          <Default>DependencyObject</Default>
           <Function>
           </Function>
         </Literal>
       </Declarations>
       <Code Language="csharp" Delimiter="$">
-        <![CDATA[static readonly DependencyPropertyKey<$Type$> $Name$PropertyKey = DependencyProperty.CreateAttachedReadonly<$ParentType$, $Type$>("$Name$");
+        <![CDATA[static readonly DependencyPropertyKey<$Type$> $Name$PropertyKey = DependencyProperty.CreateReadonlyAttachment<$DeclaringType$, $ParentType$, $Type$>("$Name$");
 public static readonly DependencyProperty<$Type$> $Name$Property = $Name$PropertyKey.Property;]]></Code>
     </Snippet>
   </CodeSnippet>
