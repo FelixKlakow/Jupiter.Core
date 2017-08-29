@@ -13,11 +13,11 @@ namespace Jupiter
         /// <summary>
         /// Retrieves the current value of the property before the change.
         /// </summary>
-        public Object Value { get { return GetValue(); } }
+        public Object Value => GetValue();
         /// <summary>
         /// Retrieves the <see cref="DependencyProperty"/> which is changing.
         /// </summary>
-        public DependencyProperty Property { get { return GetProperty(); } }
+        public DependencyProperty Property => GetProperty();
         /// <summary>
         /// Specifies if the <see cref="PropertyChangingEventArgs"/> has been created for the first change on the current stack.
         /// </summary>
@@ -28,10 +28,7 @@ namespace Jupiter
         /// Creates a new instance of the <see cref="PropertyChangingEventArgs"/>.
         /// </summary>
         /// <param name="recusivePropertyChanges">The number of recusive property changes when this args have been created.</param>
-        internal PropertyChangingEventArgs(Int16 recusivePropertyChanges)
-        {
-            IsBaseChange = recusivePropertyChanges == 1;
-        }
+        internal PropertyChangingEventArgs(Int16 recusivePropertyChanges) => IsBaseChange = recusivePropertyChanges == 1;
         #endregion
         #region #### METHODS ############################################################
         /// <summary>

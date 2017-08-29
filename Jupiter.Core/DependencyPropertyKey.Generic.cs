@@ -21,10 +21,7 @@ namespace Jupiter
         /// Initializes the instance of the <see cref="DependencyPropertyKey"/> class.
         /// </summary>
         /// <param name="property">The <see cref="DependencyProperty{TPropertyType}"/> which created the current key.</param>
-        internal DependencyPropertyKey(DependencyProperty<TPropertyType> property)
-        {
-            Property = property ?? throw new ArgumentNullException(nameof(property));
-        }
+        internal DependencyPropertyKey(DependencyProperty<TPropertyType> property) => Property = property ?? throw new ArgumentNullException(nameof(property));
         #endregion
         #region #### PROTECTED METHODS ##################################################
         /// <summary>

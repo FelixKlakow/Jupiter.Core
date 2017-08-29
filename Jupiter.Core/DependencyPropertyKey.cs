@@ -14,7 +14,7 @@ namespace Jupiter
         /// <summary>
         /// Retrieves the <see cref="DependencyProperty"/> which is associated with the current key.
         /// </summary>
-        public DependencyProperty Property { get { return GetProperty(); } }
+        public DependencyProperty Property => GetProperty();
         #endregion
         #region #### CTOR ###############################################################
         /// <summary>

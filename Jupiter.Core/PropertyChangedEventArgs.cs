@@ -32,10 +32,7 @@ namespace Jupiter
         /// Initializes a new instance of the <see cref="PropertyChangedEventArgs"/>.
         /// </summary>
         /// <param name="recusivePropertyChanges">The number of recusive property changes when this args have been created.</param>
-        internal PropertyChangedEventArgs(Int16 recusivePropertyChanges)
-        {
-            IsBaseChange = recusivePropertyChanges == 1;
-        }
+        internal PropertyChangedEventArgs(Int16 recusivePropertyChanges) => IsBaseChange = recusivePropertyChanges == 1;
         #endregion
         #region #### METHODS ############################################################
         /// <summary>

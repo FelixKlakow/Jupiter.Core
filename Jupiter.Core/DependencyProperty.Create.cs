@@ -24,15 +24,13 @@ namespace Jupiter
         public static DependencyPropertyKey<TProperty> CreateReadonly<TDeclarer, TProperty>(Expression<Func<TDeclarer, TProperty>> getter, TProperty defaultValue = default(TProperty), BindingMode bindingMode = BindingMode.Default, PropertyValidationDelegate<TDeclarer, TProperty> validation = null, PropertyChangingDelegate<TDeclarer, TProperty> propertyChanging = null, PropertyChangedDelegate<TDeclarer, TProperty> propertyChanged = null, CoerceValueDelegate<TDeclarer, TProperty> coerceValue = null)
             where TDeclarer : class, IDependencyObject
         {
-            DependencyPropertyKey<TProperty> key;
-            new DependencyProperty<TProperty, TDeclarer>(TypeOf<TDeclarer>.TypeInfo, GetPropertyName<TDeclarer, TProperty>(getter), bindingMode, false, defaultValue, coerceValue, validation, propertyChanging, propertyChanged, out key);
+            new DependencyProperty<TProperty, TDeclarer>(TypeOf<TDeclarer>.TypeInfo, GetPropertyName<TDeclarer, TProperty>(getter), bindingMode, false, defaultValue, coerceValue, validation, propertyChanging, propertyChanged, out DependencyPropertyKey<TProperty> key);
             return key;
         }
         public static DependencyPropertyKey<TProperty> CreateReadonly<TDeclarer, TProperty>(Expression<Func<TDeclarer, TProperty>> getter, CreateValueDelegate<TDeclarer, TProperty> defaultValueFactory, BindingMode bindingMode = BindingMode.Default, PropertyValidationDelegate<TDeclarer, TProperty> validation = null, PropertyChangingDelegate<TDeclarer, TProperty> propertyChanging = null, PropertyChangedDelegate<TDeclarer, TProperty> propertyChanged = null, CoerceValueDelegate<TDeclarer, TProperty> coerceValue = null)
             where TDeclarer : class, IDependencyObject
         {
-            DependencyPropertyKey<TProperty> key;
-            new DependencyProperty<TProperty, TDeclarer>(TypeOf<TDeclarer>.TypeInfo, GetPropertyName<TDeclarer, TProperty>(getter), bindingMode, true, defaultValueFactory, coerceValue, validation, propertyChanging, propertyChanged, out key);
+            new DependencyProperty<TProperty, TDeclarer>(TypeOf<TDeclarer>.TypeInfo, GetPropertyName<TDeclarer, TProperty>(getter), bindingMode, true, defaultValueFactory, coerceValue, validation, propertyChanging, propertyChanged, out DependencyPropertyKey<TProperty> key);
             return key;
         }
         public static DependencyProperty<TProperty> CreateAttachment<TDeclarer, TOwner, TProperty>(String name, TProperty defaultValue = default(TProperty), BindingMode bindingMode = BindingMode.Default, PropertyValidationDelegate<TOwner, TProperty> validation = null, PropertyChangingDelegate<TOwner, TProperty> propertyChanging = null, PropertyChangedDelegate<TOwner, TProperty> propertyChanged = null, CoerceValueDelegate<TOwner, TProperty> coerceValue = null)
@@ -51,16 +49,14 @@ namespace Jupiter
             where TOwner : class, IDependencyObject
         {
             ValidatePropertyName(name);
-            DependencyPropertyKey<TProperty> key;
-            new DependencyProperty<TProperty, TOwner>(TypeOf<TDeclarer>.TypeInfo, name, bindingMode, true, defaultValue, coerceValue, validation, propertyChanging, propertyChanged, out key);
+            new DependencyProperty<TProperty, TOwner>(TypeOf<TDeclarer>.TypeInfo, name, bindingMode, true, defaultValue, coerceValue, validation, propertyChanging, propertyChanged, out DependencyPropertyKey<TProperty> key);
             return key;
         }
         public static DependencyPropertyKey<TProperty> CreateReadonlyAttachment<TDeclarer, TOwner, TProperty>(String name, CreateValueDelegate<TOwner, TProperty> defaultValueFactory, BindingMode bindingMode = BindingMode.Default, PropertyValidationDelegate<TOwner, TProperty> validation = null, PropertyChangingDelegate<TOwner, TProperty> propertyChanging = null, PropertyChangedDelegate<TOwner, TProperty> propertyChanged = null, CoerceValueDelegate<TOwner, TProperty> coerceValue = null)
             where TOwner : class, IDependencyObject
         {
             ValidatePropertyName(name);
-            DependencyPropertyKey<TProperty> key;
-            new DependencyProperty<TProperty, TOwner>(TypeOf<TDeclarer>.TypeInfo, name, bindingMode, true, defaultValueFactory, coerceValue, validation, propertyChanging, propertyChanged, out key);
+            new DependencyProperty<TProperty, TOwner>(TypeOf<TDeclarer>.TypeInfo, name, bindingMode, true, defaultValueFactory, coerceValue, validation, propertyChanging, propertyChanged, out DependencyPropertyKey<TProperty> key);
             return key;
         }
         #endregion

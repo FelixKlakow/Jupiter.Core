@@ -33,7 +33,7 @@ namespace Jupiter
         /// </summary>
         internal DependencyExpression OverrideExpression
         {
-            get { return _OverrideExpression; }
+            get => _OverrideExpression;
             set
             {
                 if (_OverrideExpression != null)

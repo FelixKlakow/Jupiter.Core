@@ -32,7 +32,7 @@ namespace Jupiter
         /// <summary>
         /// Retrieves a enumeration with <see cref="DependencyProperty"/> objects which has been attached to the current object.
         /// </summary>
-        public IEnumerable<DependencyProperty> AttachedProperties { get { return _Values.Keys.Where(p => p.IsAttachement).ToArray(); } }
+        public IEnumerable<DependencyProperty> AttachedProperties => _Values.Keys.Where(p => p.IsAttachement).ToArray();
         /// <summary>
         /// Retrieves the object whichs dependency proeprties should be represented.
         /// </summary>
@@ -449,19 +449,19 @@ namespace Jupiter
             /// <summary>
             /// Retrieves the current value of the represented <see cref="DependencyProperty"/>.
             /// </summary>
-            public Object Value { get { return GetValue(); } }
+            public Object Value => GetValue();
             /// <summary>
             /// Retrieves the current base value of the represented <see cref="DependencyProperty"/>.
             /// </summary>
-            public Object BaseValue { get { return GetBaseValue(); } }
+            public Object BaseValue => GetBaseValue();
             /// <summary>
             /// Retrieves the current expression of the represented <see cref="DependencyProperty"/>.
             /// </summary>
-            public DependencyExpression Expression { get { return GetExpression(); } }
+            public DependencyExpression Expression => GetExpression();
             /// <summary>
             /// Retrieves the current override expression of the represented <see cref="DependencyProperty"/>.
             /// </summary>
-            public DependencyExpression OverrideExpression { get { return GetOverrideExpression(); } }
+            public DependencyExpression OverrideExpression => GetOverrideExpression();
             #endregion
             #region #### PRIVATE METHODS ####################################################
             /// <summary>
@@ -542,15 +542,15 @@ namespace Jupiter
             /// <summary>
             /// Specifies if the property value can be removed.
             /// </summary>
-            public override Boolean IsRemoveable { get { return _ChangeHandler == null; } }
+            public override Boolean IsRemoveable => _ChangeHandler == null;
             /// <summary>
             /// Retrieves the current value of the represented <see cref="DependencyProperty"/>.
             /// </summary>
-            public new TProperty Value { get { return _Value; } }
+            public new TProperty Value => _Value;
             /// <summary>
             /// Retrieves the current base value of the represented <see cref="DependencyProperty"/>.
             /// </summary>
-            public new virtual TProperty BaseValue { get { return _Value; } }
+            public new virtual TProperty BaseValue => _Value;
             #endregion
             #region #### CTOR ###############################################################
             public PropertyValueStorage(DependencyProperty<TProperty> property, IDependencyObject owner)
@@ -739,14 +739,11 @@ namespace Jupiter
             /// <summary>
             /// Retrieves the current base value of the represented <see cref="DependencyProperty"/>.
             /// </summary>
-            public override TProperty BaseValue { get { return _BaseValue; } }
+            public override TProperty BaseValue => _BaseValue;
             #endregion
             #region #### CTOR ###############################################################
             public PropertyDualValueStorage(DependencyProperty<TProperty> property, IDependencyObject owner)
-                : base(property, owner)
-            {
-                _BaseValue = _Value;
-            }
+                : base(property, owner) => _BaseValue = _Value;
             #endregion
             #region #### PUBLIC METHODS #####################################################
             /// <summary>

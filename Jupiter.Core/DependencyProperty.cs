@@ -30,7 +30,7 @@ namespace Jupiter
         /// <summary>
         /// Retrieves if the property is readonly and can only be written to when having a <see cref="DependencyPropertyKey"/>.
         /// </summary>
-        public Boolean IsReadonly { get { return Key != null; } }
+        public Boolean IsReadonly => Key != null;
         /// <summary>
         /// Retrieves the type in which the <see cref="DependencyProperty"/> is declared in.
         /// </summary>
@@ -139,12 +139,12 @@ namespace Jupiter
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>true if the current object is equal to the other parameter; otherwise, false.</returns>
-        public Boolean Equals(DependencyProperty other) => 
+        public Boolean Equals(DependencyProperty other) =>
             other != null &&
             PropertyType == other.PropertyType &&
             DeclaringType == other.DeclaringType &&
             Name == other.Name &&
-            OwnerType == other.OwnerType && 
+            OwnerType == other.OwnerType &&
             IsAttachement == other.IsAttachement;
         /// <summary>
         /// Retrieves the current object represented as string.
@@ -152,7 +152,21 @@ namespace Jupiter
         /// <returns>The current object represented as string.</returns>
         public override String ToString() => $"Name={Name} OwnerType={OwnerType} PropertyType={PropertyType}";
         #endregion
-        #region #### PRIVATE METHODS ####################################################
+        #region #### OPERATOR METHODS ###################################################
+        /// <summary>
+        /// Compares two <see cref="DependencyProperty"/> instances for equality.
+        /// </summary>
+        /// <param name="first">The first object to compare.</param>
+        /// <param name="second">The second object to compare.</param>
+        /// <returns>True when both objects are equal; otherwise false.</returns>
+        public static Boolean operator ==(DependencyProperty first, DependencyProperty second) => Equals(first, second);
+        /// <summary>
+        /// Compares two <see cref="DependencyProperty"/> instances for inequality.
+        /// </summary>
+        /// <param name="first">The first object to compare.</param>
+        /// <param name="second">The second object to compare.</param>
+        /// <returns>True when both objects are not equal; otherwise false.</returns>
+        public static Boolean operator !=(DependencyProperty first, DependencyProperty second) => !(first == second);
         #endregion
         #region #### NESTED TYPES #######################################################
         #endregion
