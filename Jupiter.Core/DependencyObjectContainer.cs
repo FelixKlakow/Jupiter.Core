@@ -59,6 +59,17 @@ namespace Jupiter
         #endregion
         #region #### METHODS ############################################################
         /// <summary>
+        /// Checks whether the access to the property is allowed for the state of the current object.
+        /// </summary>
+        /// <param name="property">The property to check.</param>
+        /// <param name="exception">A custom exception which should be thrown instead of the default exception.</param>
+        /// <returns>True if access is allowed; otherwise false.</returns>
+        protected virtual Boolean CheckPropertyAccess(DependencyProperty property, out Exception exception)
+        {
+            exception = null;
+            return true;
+        }
+        /// <summary>
         /// Gets the storage for the specified property.
         /// </summary>
         /// <param name="property">The <see cref="DependencyProperty"/> to get the storage for.</param>
@@ -97,6 +108,9 @@ namespace Jupiter
         /// <returns>The <see cref="PropertyValueStorage"/> for the specified property; null when no storage could be found and should not be created.</returns>
         PropertyValueStorage GetStorage(DependencyProperty property, Boolean create)
         {
+            // Check if access is allowed
+            if (!CheckPropertyAccess(property, out Exception customException)) throw (customException ?? new InvalidOperationException("Access forbidden"));
+
 #if DEBUG
             // In debug mode we check if the property is a valid for the current object
             if (!IsValidProperty(property)) throw new InvalidOperationException($"Property '{property}' is not valid for the current object");
@@ -260,11 +274,10 @@ namespace Jupiter
                 // Set the default value to trigger events
                 storage.SetValue(this, defaultValue);
 
-                PropertyValueStorage currentStorage;
                 // Check if the storage is still existing and can be removed ( to keep the object small )
                 // TODO : This could be much faster when using something else than a dictionary
                 if (storage.IsRemoveable && storage.BaseValue == defaultValue &&
-                    _Values.TryGetValue(property, out currentStorage) && currentStorage == storage)
+                    _Values.TryGetValue(property, out PropertyValueStorage currentStorage) && currentStorage == storage)
                 {
                     // Try to remove the property from the container
                     _Values.Remove(property);
@@ -288,11 +301,10 @@ namespace Jupiter
                 // Set the default value to trigger events
                 storage.SetValue(this, defaultValue);
 
-                PropertyValueStorage currentStorage;
                 // Check if the storage is still existing and can be removed ( to keep the object small )
                 // TODO : This could be much faster when using something else than a dictionary
                 if (storage.IsRemoveable && storage.BaseValue == defaultValue &&
-                    _Values.TryGetValue(property, out currentStorage) && currentStorage == storage)
+                    _Values.TryGetValue(property, out PropertyValueStorage currentStorage) && currentStorage == storage)
                 {
                     // Try to remove the property from the container
                     _Values.Remove(property);
