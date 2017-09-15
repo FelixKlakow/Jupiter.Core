@@ -13,15 +13,15 @@ namespace Jupiter
         /// <summary>
         /// Retrieves the new value of the property.
         /// </summary>
-        public Object NewValue { get; }
+        public Object NewValue { get => GetNewValue(); }
         /// <summary>
         /// Retrieves the old value of the property.
         /// </summary>
-        public Object OldValue { get; }
+        public Object OldValue { get => GetOldValue(); }
         /// <summary>
         /// Retrieves the <see cref="DependencyProperty"/> which has been changed.
         /// </summary>
-        public DependencyProperty Property { get; }
+        public DependencyProperty Property { get => GetProperty(); }
         /// <summary>
         /// Specifies if the <see cref="PropertyChangedEventArgs"/> has been created for the first change on the current stack.
         /// </summary>
