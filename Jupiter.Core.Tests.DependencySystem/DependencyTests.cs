@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Jupiter.Core.Reflection;
+using System.Linq;
 
 namespace Jupiter.Tests.DependencySystem
 {
@@ -168,6 +170,17 @@ namespace Jupiter.Tests.DependencySystem
         {
             TestClass test = new TestClass();
             test.SetValue(TestClass.ReadonlyTestProperty, 4);
+        }
+
+        [TestMethod]
+        public void SharedReflectionTest()
+        {
+            SharedReflectionManager manager = new SharedReflectionManager();
+            SharedTypeInfo info = manager.GetInfo<TestClass>();
+            IReadOnlyList<SharedPropertyInfo> declaredProperties = info.DeclaredProperties;
+            Assert.IsNotNull(declaredProperties.FirstOrDefault(p => p.DependencyProperty == TestClass.ReadonlyTestProperty));
+            Assert.IsNotNull(declaredProperties.FirstOrDefault(p => p.DependencyProperty == TestClass.TestCoerceToggleProperty));
+            Assert.IsNotNull(declaredProperties.FirstOrDefault(p => p.DependencyProperty == TestClass.TestProperty));
         }
     }
 }
