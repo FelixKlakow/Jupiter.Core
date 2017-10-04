@@ -36,6 +36,11 @@ namespace Jupiter.Core.Reflection
         }
         #endregion
         #region #### PUBLIC #############################################################
+        /// <summary>
+        /// Retrieves the current object represented as string.
+        /// </summary>
+        /// <returns>The current object represented as string.</returns>
+        public override String ToString() => $"Name={Name} DeclaringType={DeclaringType}";
         #endregion
     }
 }

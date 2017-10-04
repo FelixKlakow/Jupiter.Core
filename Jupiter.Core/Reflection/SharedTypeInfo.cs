@@ -18,6 +18,7 @@ namespace Jupiter.Core.Reflection
         #endregion
         #region #### VARIABLES ##########################################################
         IReadOnlyList<SharedPropertyInfo> _DeclaredProperties;
+        IReadOnlyDictionary<String, SharedPropertyInfo> _DeclaredPropertiesLookup;
 
         //ManualResetEvent _MembersReadyCompletion;
         ManualResetEvent _ObjectParseCompletion = new ManualResetEvent(false);
@@ -94,6 +95,29 @@ namespace Jupiter.Core.Reflection
         }
         #endregion
         #region #### PUBLIC #############################################################
+        /// <summary>
+        /// Tries to find a property in the current and all base types.
+        /// </summary>
+        /// <param name="name">The unique name of the property.</param>
+        /// <param name="property">The property to search for.</param>
+        /// <returns>True if the property could be found; otherwise false.</returns>
+        public Boolean TryGetProperty(String name, out SharedPropertyInfo property)
+        {
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            // Wait until the parser is done
+            WaitUntilReady(_ObjectParseCompletion);
+
+            SharedTypeInfo current = this;
+            while (!current._DeclaredPropertiesLookup.TryGetValue(name, out property) && current.BaseType != null)
+                current = current.BaseType;
+
+            return property != null;
+        }
+        /// <summary>
+        /// Retrieves the current object represented as string.
+        /// </summary>
+        /// <returns>The current object represented as string.</returns>
+        public override String ToString() => $"Type={Type} IsStatic={IsStatic} IsValueType={IsValueType}";
         #endregion
         #region #### PRIVATE ############################################################
         /// <summary>
@@ -112,8 +136,11 @@ namespace Jupiter.Core.Reflection
                     propertyLookup.TryGetValue(item.Name, out DependencyProperty dependencyProperty);
                     properties.Add(new SharedPropertyInfo(reflectionManager, this, item, dependencyProperty, DefaultValue));
                 }
+                // Assign properties to the object
                 _DeclaredProperties = properties.ToImmutableArray();
+                _DeclaredPropertiesLookup = _DeclaredProperties.ToImmutableDictionary(p => p.Name);
 
+                // Set parsing to finished
                 _ObjectParseCompletion.Set();
             }
             _ObjectParseCompletion = null;

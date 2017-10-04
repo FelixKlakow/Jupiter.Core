@@ -67,6 +67,11 @@ namespace Jupiter.Core.Reflection
         /// <param name="value">The value to test.</param>
         /// <returns>True if the value equals the default value of the member; otherwise false.</returns>
         public Boolean IsDefaultValue(Object value) => Equals(value, _DefaultValue);
+        /// <summary>
+        /// Retrieves the current object represented as string.
+        /// </summary>
+        /// <returns>The current object represented as string.</returns>
+        public override String ToString() => $"Name={Name} DeclaringType={DeclaringType.Type} ValueType={ValueType.Type} CanWrite={CanWrite}";
         #endregion
         #region #### PRIVATE ############################################################
         #endregion
