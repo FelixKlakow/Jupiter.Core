@@ -38,7 +38,7 @@ namespace Jupiter.Core.Reflection
             if (DependencyProperty == null) return _Property.GetValue(instance);
 
             IDependencyObject dependencyObject = (IDependencyObject)instance;
-            return dependencyObject.GetValueExtension(DependencyProperty) ?? dependencyObject.GetValue(DependencyProperty);
+            return dependencyObject.GetValueExtension(DependencyProperty) ?? dependencyObject.GetBaseValue(DependencyProperty);
         }
         /// <summary>
         /// Sets the value of the member for the specified instance.
