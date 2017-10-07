@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 
-namespace Jupiter.Core.Reflection
+namespace Jupiter.Reflection
 {
     /// <summary>
     /// Provides information and access to a property or field of an object.

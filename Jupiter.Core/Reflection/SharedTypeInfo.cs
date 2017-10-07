@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Jupiter.Core.Reflection
+namespace Jupiter.Reflection
 {
     /// <summary>
     /// Provides extended information about types.
@@ -104,12 +104,18 @@ namespace Jupiter.Core.Reflection
         public Boolean TryGetProperty(String name, out SharedPropertyInfo property)
         {
             if (name == null) throw new ArgumentNullException(nameof(name));
+
             // Wait until the parser is done
             WaitUntilReady(_ObjectParseCompletion);
 
             SharedTypeInfo current = this;
             while (!current._DeclaredPropertiesLookup.TryGetValue(name, out property) && current.BaseType != null)
+            {
                 current = current.BaseType;
+
+                // Wait until the parser is done
+                WaitUntilReady(current._ObjectParseCompletion);
+            }
 
             return property != null;
         }

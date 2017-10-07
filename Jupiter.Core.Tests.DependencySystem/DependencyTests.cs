@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Jupiter.Core.Reflection;
 using System.Linq;
+using Jupiter.Reflection;
 
 namespace Jupiter.Tests.DependencySystem
 {

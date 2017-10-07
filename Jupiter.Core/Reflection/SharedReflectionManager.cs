@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Jupiter.Core.Reflection
+namespace Jupiter.Reflection
 {
     /// <summary>
     /// Provides information about 
@@ -32,7 +32,7 @@ namespace Jupiter.Core.Reflection
         /// </summary>
         /// <typeparam name="T">The type to get the <see cref="SharedTypeInfo"/> for.</typeparam>
         /// <returns>The <see cref="SharedTypeInfo"/> for the specified type.</returns>
-        public SharedTypeInfo GetInfo<T>() => GetInfo(typeof(T).GetTypeInfo());
+        public SharedTypeInfo GetInfo<T>() => GetInfo(TypeOf<T>.TypeInfo);
         /// <summary>
         /// Gets a <see cref="SharedTypeInfo"/> for the specified <see cref="TypeInfo"/>.
         /// </summary>
