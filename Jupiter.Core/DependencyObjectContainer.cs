@@ -8,10 +8,10 @@ using System.Text;
 namespace Jupiter
 {
     /// <summary>
-    /// Provides a implementation of the <see cref="IDependencyObject"/> interface.
+    /// Provides a implementation of the <see cref="IDependencyObject"/> interface but does not expose the <see cref="IDependencyObject"/> interface.
     /// </summary>
     /// <remarks>The <see cref="DependencyObjectContainer"/> class can be used as base class for dependency objects or as container for objects which implement the <see cref="IDependencyObject"/> interface.</remarks>
-    public abstract class DependencyObjectContainer : IDependencyObject
+    public class DependencyObjectContainer
     {
         #region #### VARIABLES ##########################################################
         // TODO : Dictionary should be replaced later by a faster mechanism
@@ -44,7 +44,7 @@ namespace Jupiter
         /// </summary>
         internal DependencyObjectContainer()
         {
-            RepresentedObject = this;
+            RepresentedObject = (this as IDependencyObject) ?? throw new NotSupportedException("Object must inherit from IDependencyObject") ;
             _DependencyType = DependencyType.GetDependencyType(RepresentedObject.GetType().GetTypeInfo(), true);
         }
         /// <summary>
@@ -259,7 +259,21 @@ namespace Jupiter
         /// Coerces the value of the specified property.
         /// </summary>
         /// <param name="property">The <see cref="DependencyProperty"/> to coerce.</param>
-        public void CoerceValue(DependencyProperty property) => GetStorage(property, false, false)?.CoerceValue(this);
+        public void CoerceValue(DependencyProperty property)
+        {
+            PropertyValueStorage storage = GetStorage(property, true, false);
+
+            // In any case we need to coerce the property value
+            storage.CoerceValue(this);
+            // Check if we can remove the storage again
+            if (storage.IsRemoveable && 
+                Equals(storage.BaseValue, property.GetPropertyDefault(RepresentedObject)) && Equals(storage.Value, storage.BaseValue) &&
+                _Values.TryGetValue(property, out PropertyValueStorage currentStorage) && currentStorage == storage)
+            {
+                // Remove the property again
+                _Values.Remove(property);
+            }
+        }
         /// <summary>
         /// Clears the value of the property to the default value.
         /// </summary>
@@ -270,13 +284,13 @@ namespace Jupiter
             if (storage != null)
             {
                 // Get the default value of the property
-                Object defaultValue = property.GetPropertyDefault(this);
+                Object defaultValue = property.GetPropertyDefault(RepresentedObject);
                 // Set the default value to trigger events
                 storage.SetValue(this, defaultValue);
 
                 // Check if the storage is still existing and can be removed ( to keep the object small )
                 // TODO : This could be much faster when using something else than a dictionary
-                if (storage.IsRemoveable && storage.BaseValue == defaultValue &&
+                if (storage.IsRemoveable && Equals(storage.BaseValue, defaultValue) && Equals(storage.Value, storage.BaseValue) &&
                     _Values.TryGetValue(property, out PropertyValueStorage currentStorage) && currentStorage == storage)
                 {
                     // Try to remove the property from the container
@@ -297,7 +311,7 @@ namespace Jupiter
             if (storage != null)
             {
                 // Get the default value of the property
-                Object defaultValue = property.GetPropertyDefault(this);
+                Object defaultValue = property.GetPropertyDefault(RepresentedObject);
                 // Set the default value to trigger events
                 storage.SetValue(this, defaultValue);
 
@@ -371,7 +385,7 @@ namespace Jupiter
                 {
                     storage = GetStorage(property, true, false);
                 }
-                else return property.GetPropertyDefault(null);
+                else return property.GetPropertyDefault(RepresentedObject);
             }
             return storage.Value;
         }

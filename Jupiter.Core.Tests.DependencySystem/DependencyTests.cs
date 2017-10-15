@@ -33,20 +33,23 @@ namespace Jupiter.Tests.DependencySystem
         [TestMethod]
         public void CoerceValueTest()
         {
-            TestClass test = new TestClass()
+            TestClass test = new TestClass
             {
-                Test = 5.1f
+                TestCoerceToggle = true
             };
-
-            Assert.AreEqual(5.1f, test.Test);
-
-            test.TestCoerceToggle = true;
 
             Assert.AreEqual(10f, test.Test);
 
             test.TestCoerceToggle = false;
 
+            test.Test = 5.1f;
             Assert.AreEqual(5.1f, test.Test);
+
+            test.TestCoerceToggle = true;
+
+            test.ClearValue(TestClass.TestProperty);
+            Assert.AreEqual(10f, test.Test);
+
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Jupiter
 {
-    public abstract class DependencyObject : DependencyObjectContainer
+    public abstract class DependencyObject : DependencyObjectContainer, IDependencyObject
     {
         #region #### VARIABLES ##########################################################
         #endregion
