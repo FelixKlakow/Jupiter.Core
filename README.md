@@ -1,6 +1,17 @@
 # Jupiter.Core
 Open-Source dependency property system
 
+## Features
+- Properties
+-- can be read-only.
+-- can be attached.
+-- can have a DependencyExtension attached for value manipulation.
+- Properties only consume memory when the property...
+-- is coerced and the value is not matching the default one.
+-- has a DependencyExtension assigned.
+-- has a non-default value assigned.
+-- has a change handler registered.
+- IDependencyObject allows implementation when you cannot modify the base object.
 
 ## Upcomming features:
 
