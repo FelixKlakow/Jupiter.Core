@@ -3,14 +3,19 @@ Open-Source dependency property system
 
 ## Features
 - Properties
-  - can be read-only.
-  - can be attached.
-  - can have a DependencyExtension attached for value manipulation.
+  - Can be read-only
+  - Can be attached to IDependencyObject.
+  - Can have a DependencyExtension attached for value manipulation.
+  - Can have the following events/handlers
+    - Coerce-value: Coerces the value
+    - Validation: Validates the value against custom rules
+    - Property-changing
+    - Property-changed
 - Properties only consume memory when the property...
   - is coerced and the value is not matching the default one.
   - has a DependencyExtension assigned.
   - has a non-default value assigned.
-  - has a change handler registered.
+  - has a specific change handler registered.
 - IDependencyObject allows implementation when you cannot modify the base object.
 
 ## Upcomming features:
@@ -26,7 +31,7 @@ Dependency-Object with two properties where one of them is read-only.
 ```C#
 public class Sample : DependencyObject
 {
-    public static readonly DependencyProperty<String> NameProperty = DependencyProperty.Create<Sample, String>(p => p.Name);
+    public static readonly DependencyProperty<String> NameProperty = DependencyProperty.Create<Sample, String>(p => p.Name, String.Empty);
     static readonly DependencyPropertyKey<DateTime> TimeOfCreationPropertyKey =  DependencyProperty.CreateReadonly<Sample, DateTime>(p => p.TimeOfCreation);
     public static readonly DependencyProperty TimeOfCreationProperty = TimeOfCreationPropertyKey.Property;
     
@@ -38,8 +43,8 @@ public class Sample : DependencyObject
     
     public String TimeOfCreation
     {
-        get => GetValue(eOfCreationProperty);
-        private set => SetValue(eOfCreationPropertyKey, value);
+        get => GetValue(TimeOfCreationProperty);
+        private set => SetValue(TimeOfCreationPropertyKey, value);
     }
     
     public Sample() => TimeOfCreation = DateTime.Now;
