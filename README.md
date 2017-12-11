@@ -1,6 +1,8 @@
 # Jupiter.Core
 Open-Source dependency property system
 
+[![jupiter MyGet Build Status](https://www.myget.org/BuildSource/Badge/jupiter?identifier=5686f341-6cb3-48fa-a0f9-7e9a05d548b3)](https://www.myget.org/)
+
 ## Features
 - Properties
   - Can be read-only
