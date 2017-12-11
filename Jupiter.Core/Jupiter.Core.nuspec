@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Jupiter.Core</id>
+    <version>$version$</version>
+    <title>Jupiter SDK</title>
+    <authors>Felix Klakow</authors>
+    <owners>Felix Klakow</owners>
+    <licenseUrl>https://github.com/FelixKlakow/Jupiter.Core/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/FelixKlakow/Jupiter.Core</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Jupiter.Core provides a dependency property system which is not bound to any existing frameworks.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright &#x00A9; Felix Klakow.  All rights reserved.</copyright>
+    <tags>sdk dependency property bindings wpf mvvm</tags>
+  </metadata>
+  <files>
+	  <file src="Jupiter.Core\bin\$configuration$\Jupiter.Core.dll" target="lib\netstandard1.4\" />
+    <file src="Jupiter.Core\bin\$configuration$\Jupiter.Core.xml" target="lib\netstandard1.4\" />
+  </files>
+</package>
