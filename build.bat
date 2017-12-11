@@ -14,11 +14,11 @@ if "%nuget%" == "" (
 	set nuget=nuget
 )
 
-%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild Jupiter.Core\Jupiter.Core.csproj /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
+%MsBuildExe% Jupiter.Core\Jupiter.Core.csproj /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
 
 mkdir Build
 mkdir Build\lib
-mkdir Build\lib\net40
+mkdir Build\lib\netstandard1.4\
 
 %nuget% pack "Jupiter.Core\Jupiter.Core.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"
 
