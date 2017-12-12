@@ -12,7 +12,7 @@ namespace Jupiter.Tests.DependencySystem
         public static DependencyProperty<Boolean> TestCoerceToggleProperty = DependencyProperty.Create<TestClass, Boolean>(p => p.TestCoerceToggle, propertyChanged: (s, a) => s.CoerceValue(TestProperty));
         public static DependencyPropertyKey<UInt32> ReadonlyTestPropertyKey = DependencyProperty.CreateReadonly<TestClass, UInt32>(p => p.ReadonlyTest);
         public static DependencyProperty<UInt32> ReadonlyTestProperty = ReadonlyTestPropertyKey.Property;
-
+        
         public Single Test
         {
             get { return GetValue(TestProperty); }
