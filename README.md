@@ -5,26 +5,23 @@ Open-Source dependency property system
 
 ## Features
 - Properties
-  - Can be read-only
-  - Can be attached to IDependencyObject.
+  - normal, read-only, attached, attached + read-only
+  - Handlers and values all use generics to avoid unnecessary casts
   - Can have a DependencyExtension attached for value manipulation.
-  - Can have the following events/handlers
-    - Coerce-value: Coerces the value
-    - Validation: Validates the value against custom rules
-    - Property-changing
-    - Property-changed
-- Properties only consume memory when the property...
-  - is coerced and the value is not matching the default one.
-  - has a DependencyExtension assigned.
-  - has a non-default value assigned.
-  - has a specific change handler registered.
+  - Supports the following features
+    - Value-coercing: Coerces the value of a property
+    - Value-validation: Validates the value before changing it
+    - Property-changing: Executes code before the value is going to change
+    - Property-changed: Executes code when the value has been changed
+- Property memory consumption reduced as only non-default values require storing of the actual value.
 - IDependencyObject allows implementation when you cannot modify the base object.
 
 ## Upcomming features:
 
-- Animations
+- Multithreading-support ( access checks are supported already by inheriting from DependencyObjectContainer/DependencyObject and overwriting "CheckPropertyAccess" )
 - Property-Bindings
 - Serialization-Deserialization
+- Animations
 
 ## Samples
 
@@ -68,6 +65,66 @@ public abstract class MvvmDependencyObject : MvvmBase, IDependencyObject
     #endregion
 }
 ```
+
+Reacting to changes of a dependency-property:
+
+```C#
+public void CreateSample()
+{
+    Sample sample = new Sample();
+    sample.AddChangeHandler(Sample.NameProperty, Sample_NameChanged);
+    sample.Name = "Jonny"; // Prints "Jonny"
+    
+    // Remove the change handler
+    sample.RemoveChangeHandler(Sample.NameProperty, Sample_NameChanged);
+    
+    // Add a change handler which reacts to all property changes
+    sample.PropertyChanged += Sample_PropertyChanged;
+    sample.Name = "Jonny"; // No change -> Nothing happens
+    sample.Name = "Dude"; // Prints "Name: Dude"
+}
+
+void Sample_NameChanged(IDependencyObject sender, PropertyChangedEventArgs<String> args)
+{
+    // Called when the property has been changed
+    Console.WriteLine(args.NewValue);
+}
+
+void Sample_PropertyChanged(IDependencyObject sender, PropertyChangedEventArgs args)
+{
+    // Called when any property has been changed
+    Console.WriteLine($"{args.Property.Name} {args.NewValue}");
+}
+```
+
+Property-validation ( ensures "Name" is never null ):
+```C#
+public class ValidationSample : DependencyObject
+{
+    public static readonly DependencyProperty<String> NameProperty = DependencyProperty.Create<ValidationSample, String>(p => p.Name, String.Empty, validation:(s, v) => v != null);
+
+    public String Name
+    {
+        get => GetValue(NameProperty);
+        set => SetValue(NameProperty, value);
+    }
+}
+```
+
+Property-coercion ( forces the "Age" to be in the range between 0 and 200, the base value still can be different ):
+```C#
+public class CoerceSample : DependencyObject
+{
+    public static readonly DependencyProperty<Int32> AgeProperty = DependencyProperty.Create<Sample, String>(p => p.Age, 0, coerceValue:(s, v) => Math.Min(200, Math.Max(0, v)));
+
+    public Int32 Age
+    {
+        get => GetValue(AgeProperty);
+        set => SetValue(AgeProperty, value);
+    }
+}
+```
+
 
 Author:
 Felix Klakow
