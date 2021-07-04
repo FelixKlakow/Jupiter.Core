@@ -32,10 +32,10 @@ namespace Jupiter
         /// <param name="property">The <see cref="DependencyProperty{TProperty}"/> which has been changed.</param>
         /// <param name="newValue">The new value of the property.</param>
         /// <param name="oldValue">The old value of the property.</param>
-        internal PropertyChangedEventArgs(Int16 recusivePropertyChanges, DependencyProperty<TProperty> property,  TProperty newValue, TProperty oldValue)
+        internal PropertyChangedEventArgs(Int16 recusivePropertyChanges, DependencyProperty<TProperty> property, TProperty newValue, TProperty oldValue)
             : base(recusivePropertyChanges)
         {
-            Property = property; 
+            Property = property;
             NewValue = newValue;
             OldValue = oldValue;
         }

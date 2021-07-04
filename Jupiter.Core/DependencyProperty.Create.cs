@@ -1,9 +1,9 @@
-﻿using Jupiter.Reflection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Jupiter.Reflection;
 
 namespace Jupiter
 {
@@ -78,7 +78,7 @@ namespace Jupiter
             MemberExpression expression = (MemberExpression)getter.Body;
             // Validate member, must be a property
             if (!(expression.Member is PropertyInfo)) throw new ArgumentException("Expression must access a property");
-            
+
             // Return the member name
             return expression.Member.Name;
         }

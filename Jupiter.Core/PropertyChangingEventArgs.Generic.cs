@@ -27,10 +27,10 @@ namespace Jupiter
         /// <param name="recusivePropertyChanges">The number of recusive property changes when this args have been created.</param>
         /// <param name="property">The <see cref="DependencyProperty{TPropertyType}"/> which is changing.</param>
         /// <param name="value">The value of the property.</param>
-        internal PropertyChangingEventArgs(Int16 recusivePropertyChanges, DependencyProperty<TProperty> property,  TProperty value)
+        internal PropertyChangingEventArgs(Int16 recusivePropertyChanges, DependencyProperty<TProperty> property, TProperty value)
             : base(recusivePropertyChanges)
         {
-            Property = property; 
+            Property = property;
             Value = value;
         }
         #endregion

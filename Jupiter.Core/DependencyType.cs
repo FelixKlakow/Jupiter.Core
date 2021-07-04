@@ -115,6 +115,10 @@ namespace Jupiter
         {
             if (_PropertyList != null)
             {
+                /* This call blocks the calling thread until the class is fully initialized, this is required
+                 * for multithreading to work as the type gets registered before the initialization might be complete. */
+                System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(Type.AsType().TypeHandle);
+
                 lock (_SyncRoot)
                 {
                     if (_PropertyList != null)

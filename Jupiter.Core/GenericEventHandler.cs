@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Jupiter
 {
-    
     /// <summary>
     /// Represents a method which will handle a event.
     /// </summary>

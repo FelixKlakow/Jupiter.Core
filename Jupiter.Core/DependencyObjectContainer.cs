@@ -1,9 +1,9 @@
-﻿using Jupiter.Reflection;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using Jupiter.Reflection;
 
 namespace Jupiter
 {
@@ -44,7 +44,7 @@ namespace Jupiter
         /// </summary>
         internal DependencyObjectContainer()
         {
-            RepresentedObject = (this as IDependencyObject) ?? throw new NotSupportedException("Object must inherit from IDependencyObject") ;
+            RepresentedObject = (this as IDependencyObject) ?? throw new NotSupportedException("Object must inherit from IDependencyObject");
             _DependencyType = DependencyType.GetDependencyType(RepresentedObject.GetType().GetTypeInfo(), true);
         }
         /// <summary>
@@ -266,7 +266,7 @@ namespace Jupiter
             // In any case we need to coerce the property value
             storage.CoerceValue(this);
             // Check if we can remove the storage again
-            if (storage.IsRemoveable && 
+            if (storage.IsRemoveable &&
                 Equals(storage.BaseValue, property.GetPropertyDefault(RepresentedObject)) && Equals(storage.Value, storage.BaseValue) &&
                 _Values.TryGetValue(property, out PropertyValueStorage currentStorage) && currentStorage == storage)
             {
